@@ -7,6 +7,17 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
 
+        <Label Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Name="Taxes"></Label>
+        <TextBox Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Name="Income" Padding="10" Width="500"></TextBox>
+        <DatePicker Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Name="IncomeDate"></DatePicker>
+        <Button Grid.Row="3" Padding="5" HorizontalAlignment="Center" VerticalAlignment="Center"
+                Click="CalculateTaxes_Click">Calculate taxes</Button>
     </Grid>
 </Window>
