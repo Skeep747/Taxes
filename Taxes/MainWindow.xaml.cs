@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Taxes.Services;
 
 namespace Taxes
 {
@@ -20,9 +9,22 @@ namespace Taxes
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly TaxesService _taxesService;
+
         public MainWindow()
         {
+            _taxesService = new TaxesService();
+
             InitializeComponent();
+            IncomeDate.SelectedDate = DateTime.Today;
+        }
+
+        private async void CalculateTaxes_Click(object sender, RoutedEventArgs e)
+        {
+            if (decimal.TryParse(Income.Text, out decimal income) && IncomeDate.SelectedDate.HasValue)
+            {
+                Taxes.Content = await _taxesService.CalculateTaxesAsync(income, IncomeDate.SelectedDate.Value);
+            }
         }
     }
 }
