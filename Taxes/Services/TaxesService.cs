@@ -1,16 +1,25 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Threading.Tasks;
 
 namespace Taxes.Services
 {
-    internal sealed class TaxesService
+    public interface ITaxesService
     {
-        private readonly ExchangeRatesService _exchangeRatesService;
+        Task<decimal> CalculateTaxesAsync(decimal income, DateTime incomeDate);
+    }
 
-        public TaxesService()
+    public sealed class TaxesService : ITaxesService
+    {
+        private readonly ILogger _logger;
+        private readonly IExchangeRatesService _exchangeRatesService;
+
+        public TaxesService(ILogger logger, IExchangeRatesService exchangeRatesService)
         {
-            _exchangeRatesService = new ExchangeRatesService();
+            _logger = logger;
+            _exchangeRatesService = exchangeRatesService;
         }
+
         public async Task<decimal> CalculateTaxesAsync(decimal income, DateTime incomeDate)
         {
             var exchangeRate = await _exchangeRatesService.GetExchangeRateAsync(incomeDate);
