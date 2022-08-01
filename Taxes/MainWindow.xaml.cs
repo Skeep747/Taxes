@@ -19,27 +19,85 @@ namespace Taxes
             _taxesService = taxesService;
 
             InitializeComponent();
-            IncomeDate.SelectedDate = DateTime.Today;
+            IncomeDate1.SelectedDate = DateTime.Today;
+            IncomeDate2.SelectedDate = DateTime.Today;
+            IncomeDate3.SelectedDate = DateTime.Today;
         }
 
         private async void CalculateTaxes_Click(object sender, RoutedEventArgs e)
         {
-            if (decimal.TryParse(Income.Text, out decimal income) && IncomeDate.SelectedDate.HasValue)
+            decimal total = 0;
+
+            if (decimal.TryParse(Income1.Text, out decimal income1) && IncomeDate1.SelectedDate.HasValue)
             {
-                var tax = await _taxesService.CalculateTaxesAsync(income, IncomeDate.SelectedDate.Value);
+                var tax = await _taxesService.CalculateTaxesAsync(income1, IncomeDate1.SelectedDate.Value);
                 if (tax > 0)
                 {
-                    Taxes.Content = tax;
+                    var taxPlusExtraValue = AddExtraValue(tax, ExtraValue1.Text);
+                    total += taxPlusExtraValue;
+                    Taxes1.Content = taxPlusExtraValue + "₴";
                 }
                 else
                 {
-                    Taxes.Content = "Something went wrong! Please, see the log file for more information.";
+                    TaxesTotal.Content = "Something went wrong! Please, see the log file for more information.";
+                    return;
                 }
             }
             else
             {
-                Taxes.Content = "The value must be a number, and the date must be selected!";
+                Taxes1.Content = string.Empty;
             }
+
+            if (decimal.TryParse(Income2.Text, out decimal income2) && IncomeDate2.SelectedDate.HasValue)
+            {
+                var tax = await _taxesService.CalculateTaxesAsync(income2, IncomeDate2.SelectedDate.Value);
+                if (tax > 0)
+                {
+                    var taxPlusExtraValue = AddExtraValue(tax, ExtraValue2.Text);
+                    total += taxPlusExtraValue;
+                    Taxes2.Content = taxPlusExtraValue + "₴";
+                }
+                else
+                {
+                    TaxesTotal.Content = "Something went wrong! Please, see the log file for more information.";
+                    return;
+                }
+            }
+            else
+            {
+                Taxes2.Content = string.Empty;
+            }
+
+            if (decimal.TryParse(Income3.Text, out decimal income3) && IncomeDate3.SelectedDate.HasValue)
+            {
+                var tax = await _taxesService.CalculateTaxesAsync(income3, IncomeDate3.SelectedDate.Value);
+                if (tax > 0)
+                {
+                    var taxPlusExtraValue = AddExtraValue(tax, ExtraValue3.Text);
+                    total += taxPlusExtraValue;
+                    Taxes3.Content = taxPlusExtraValue + "₴";
+                }
+                else
+                {
+                    TaxesTotal.Content = "Something went wrong! Please, see the log file for more information.";
+                    return;
+                }
+            }
+            else
+            {
+                Taxes3.Content = string.Empty;
+            }
+
+            TaxesTotal.Content = total + "₴";
+        }
+
+        private static decimal AddExtraValue(decimal tax, string extraValue)
+        {
+            if (decimal.TryParse(extraValue, out decimal extra))
+            {
+                return tax + extra;
+            }
+            return tax;
         }
     }
 }

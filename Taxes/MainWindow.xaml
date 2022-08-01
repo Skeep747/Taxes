@@ -5,19 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Taxes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" MinHeight="500" Height="500" MinWidth="800" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="100"/>
-            <RowDefinition/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Name="Taxes"></Label>
-        <TextBox Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Name="Income" Padding="10" Width="500"></TextBox>
-        <DatePicker Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Name="IncomeDate"></DatePicker>
-        <Button Grid.Row="3" Padding="5" HorizontalAlignment="Center" VerticalAlignment="Center"
+        <Label Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Name="TaxesTotal"></Label>
+        <Grid Grid.Row="1">
+            <DatePicker HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25 0" Name="IncomeDate1"></DatePicker>
+            <TextBox HorizontalAlignment="Left" VerticalAlignment="Center" Name="Income1" Padding="5" Width="200" Margin="180 0"></TextBox>
+            <Label HorizontalAlignment="Center" VerticalAlignment="Center">+</Label>
+            <TextBox HorizontalAlignment="Right" VerticalAlignment="Center" Name="ExtraValue1" Padding="5" Width="200" Margin="180 0"></TextBox>
+            <Label HorizontalAlignment="Right" VerticalAlignment="Center" Margin="150 0">=</Label>
+            <Label HorizontalAlignment="Right" VerticalAlignment="Center" Margin="90 0" Name="Taxes1"></Label>
+        </Grid>
+        <Grid Grid.Row="2">
+            <DatePicker HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25 0" Name="IncomeDate2"></DatePicker>
+            <TextBox HorizontalAlignment="Left" VerticalAlignment="Center" Name="Income2" Padding="5" Width="200" Margin="180 0"></TextBox>
+            <Label HorizontalAlignment="Center" VerticalAlignment="Center">+</Label>
+            <TextBox HorizontalAlignment="Right" VerticalAlignment="Center" Name="ExtraValue2" Padding="5" Width="200" Margin="180 0"></TextBox>
+            <Label HorizontalAlignment="Right" VerticalAlignment="Center" Margin="150 0">=</Label>
+            <Label HorizontalAlignment="Right" VerticalAlignment="Center" Margin="90 0" Name="Taxes2"></Label>
+        </Grid>
+        <Grid Grid.Row="3">
+            <DatePicker HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25 0" Name="IncomeDate3"></DatePicker>
+            <TextBox HorizontalAlignment="Left" VerticalAlignment="Center" Name="Income3" Padding="5" Width="200" Margin="180 0"></TextBox>
+            <Label HorizontalAlignment="Center" VerticalAlignment="Center">+</Label>
+            <TextBox HorizontalAlignment="Right" VerticalAlignment="Center" Name="ExtraValue3" Padding="5" Width="200" Margin="180 0"></TextBox>
+            <Label HorizontalAlignment="Right" VerticalAlignment="Center" Margin="150 0">=</Label>
+            <Label HorizontalAlignment="Right" VerticalAlignment="Center" Margin="90 0" Name="Taxes3"></Label>
+        </Grid>
+        <Button Grid.Row="4" Padding="5" HorizontalAlignment="Center" VerticalAlignment="Center"
                 Click="CalculateTaxes_Click">Calculate taxes</Button>
     </Grid>
 </Window>
